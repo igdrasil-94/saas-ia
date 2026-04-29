@@ -1,6 +1,23 @@
 {
+  "name": "saas-marketing-ia",
+  "version": "0.0.1",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "db:migrate": "npm run db:migrate --workspace=api",
+    "db:generate": "npm run db:generate --workspace=api",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down"
+  },
   "devDependencies": {
     "@nestjs/schematics": "^11.1.0",
-    "@nestjs/testing": "^11.1.19"
+    "@nestjs/testing": "^11.1.19",
+    "turbo": "^1.11.0"
   }
 }
