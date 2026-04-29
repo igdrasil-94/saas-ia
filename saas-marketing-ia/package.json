@@ -1,0 +1,27 @@
+{
+  "name": "saas-marketing-ia",
+  "version": "0.0.1",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "start": "turbo run start",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "db:migrate": "npm run db:migrate --workspace=@saas/database",
+    "db:seed": "npm run db:seed --workspace=@saas/database",
+    "db:studio": "npm run db:studio --workspace=@saas/database"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "typescript": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "npm@10.0.0"
+}
