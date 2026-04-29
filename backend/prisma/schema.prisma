@@ -1,0 +1,58 @@
+// This is your Prisma schema file
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  contents  Content[]
+  
+  @@map("users")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Content {
+  id          String   @id @default(uuid())
+  title       String
+  content     String   @db.Text
+  type        ContentType
+  status      ContentStatus @default(DRAFT)
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  creditsUsed Int      @default(1)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("contents")
+}
+
+enum ContentType {
+  LINKEDIN_POST
+  TWITTER_THREAD
+  BLOG_ARTICLE
+  EMAIL_NEWSLETTER
+  INSTAGRAM_CAPTION
+}
+
+enum ContentStatus {
+  DRAFT
+  REVIEW
+  PUBLISHED
+  ARCHIVED
+}
